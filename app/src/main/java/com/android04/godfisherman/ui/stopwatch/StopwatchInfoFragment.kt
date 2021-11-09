@@ -13,6 +13,6 @@ class StopwatchInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_stopwatch_info, container, false)
+        return inflater.inflate(R.layout.activity_stopwatch, container, false)
     }
 }
