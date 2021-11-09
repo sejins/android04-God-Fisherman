@@ -21,4 +21,5 @@
     <dimen name="upload_iv_length_title_margin_top">36dp</dimen>
     <dimen name="upload_text_input_layout_height">60dp</dimen>
     <dimen name="upload_text_input_layout_width">160dp</dimen>
+    <dimen name="navigation_bar_height">80dp</dimen>
 </resources>
