@@ -1,19 +1,12 @@
 package com.android04.godfisherman.ui.mypage
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+
+import androidx.fragment.app.viewModels
 import com.android04.godfisherman.R
+import com.android04.godfisherman.databinding.FragmentMyPageBinding
+import com.android04.godfisherman.ui.base.BaseFragment
 
-class MyPageFragment : Fragment() {
+class MyPageFragment : BaseFragment<FragmentMyPageBinding, MyPageViewModel>(R.layout.fragment_my_page) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_my_page, container, false)
-    }
+    override val viewModel: MyPageViewModel by viewModels()
 }

@@ -22,6 +22,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         navView.setupWithNavController(navController)
         StopwatchNotification.createChannel(this)
+
+
     }
     
 }
