@@ -35,6 +35,10 @@ class SwipeMotionLayoutWrapper(private val motionLayout: MotionLayout) {
         motionLayout.transitionToState(constraintSetId)
     }
 
+    fun transitionToStateWithDuration(constraintSetId: Int, duration: Int) {
+        motionLayout.transitionToState(constraintSetId, duration)
+    }
+
     fun setTransition(transitionId: Int) {
         motionLayout.setTransition(transitionId)
     }

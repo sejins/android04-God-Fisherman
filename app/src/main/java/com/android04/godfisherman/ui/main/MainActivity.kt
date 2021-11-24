@@ -9,6 +9,7 @@ import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.app.NotificationManagerCompat
@@ -99,7 +100,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
                 changeFragment(R.id.fl_stopwatch_big, TestStopwatchFragment())
                 swipeMotionLayoutWrapper.apply {
                     setTransition(R.id.transition)
-                    transitionToState(R.id.end)
+                    binding.container.progress = 1f
                     val marginInPx = resources.getDimension(R.dimen.stopwatch_view_height_small)
                     updateConstraint(R.id.start, R.id.fl_fragment_container) {
                         it.layout.bottomMargin = marginInPx.toInt()
@@ -136,9 +137,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
                 R.id.navigation_stopwatch -> {
                     if (viewModel.stopwatchOnFlag.value == true) {
                         swipeMotionLayoutWrapper.transitionToState(R.id.end)
-                        viewModel.isFromStopwatchFragment = true
+                        // viewModel.isFromStopwatchFragment = true
                     } else {
-                        changeFragment(R.id.fl_fragment_container, StopwatchInfoFragment())
+                        // changeFragment(R.id.fl_fragment_container, StopwatchInfoFragment())
+                        addFragment(R.id.fl_fragment_container, StopwatchInfoFragment())
                     }
                     true
                 }
@@ -158,19 +160,28 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
         supportFragmentManager.beginTransaction().replace(containerId, fragment).commit()
     }
 
+    private fun addFragment(containerId: Int, fragment: Fragment) {
+        supportFragmentManager.beginTransaction().replace(containerId, fragment).addToBackStack("before").commit()
+    }
+
+    fun removeFragment() {
+        supportFragmentManager.popBackStack()
+    }
+
     private fun initMotionListener() {
         swipeMotionLayoutWrapper.setupTransitionListener(
             transitionCompletedCallback = { _, currentId ->
-                if (viewModel.isFromInfoFragment) {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.fl_fragment_container, HomeFragment()).commit()
-                    viewModel.isFromInfoFragment = false
-                    binding.navView.menu.findItem(R.id.navigation_home).isChecked = true
-                }
-                if (viewModel.isFromStopwatchFragment) {
-                    binding.navView.menu.findItem(viewModel.beforeMenuItemId).isChecked = true
-                    viewModel.isFromStopwatchFragment = false
-                }
+//                if (viewModel.isFromInfoFragment) {
+//                    supportFragmentManager.beginTransaction()
+//                        .replace(R.id.fl_fragment_container, HomeFragment()).commit()
+//                    viewModel.isFromInfoFragment = false
+//                    binding.navView.menu.findItem(R.id.navigation_home).isChecked = true
+//                }
+//                if (viewModel.isFromStopwatchFragment) {
+//                    binding.navView.menu.findItem(viewModel.beforeMenuItemId).isChecked = true
+//                    viewModel.isFromStopwatchFragment = false
+//                }
+                binding.navView.menu.findItem(viewModel.beforeMenuItemId).isChecked = true
                 MainViewModel.isFromService = false
                 when (currentId) {
                     R.id.end -> {
