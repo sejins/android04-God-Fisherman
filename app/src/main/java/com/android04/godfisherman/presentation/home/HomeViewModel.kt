@@ -61,6 +61,7 @@ class HomeViewModel @Inject constructor(
         _isRankLoading.value = true
 
         viewModelScope.launch(Dispatchers.IO) {
+
             when (val result =
                 homeRepository.fetchRankingList(FishRankingRequest.HOME, isRefresh)) {
                 is Result.Success -> {
